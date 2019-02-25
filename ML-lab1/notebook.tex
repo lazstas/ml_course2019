@@ -1,0 +1,1150 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{LabML-1}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline 
+        \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ticks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{sns}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}version\PYZus{}\PYZus{}}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} '0.9.0'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{guns.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{,}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:}    incident\_id        date           state city\_or\_county  \textbackslash{}
+        0       461105  2013-01-01    Pennsylvania     Mckeesport   
+        1       460726  2013-01-01      California      Hawthorne   
+        2       478855  2013-01-01            Ohio         Lorain   
+        3       478925  2013-01-05        Colorado         Aurora   
+        4       478959  2013-01-07  North Carolina     Greensboro   
+        
+                                             address  n\_killed  n\_injured  \textbackslash{}
+        0  1506 Versailles Avenue and Coursin Street         0          4   
+        1               13500 block of Cerise Avenue         1          3   
+        2                      1776 East 28th Street         1          3   
+        3           16000 block of East Ithaca Place         4          0   
+        4                  307 Mourning Dove Terrace         2          2   
+        
+                                                incident\_url  \textbackslash{}
+        0  http://www.gunviolencearchive.org/incident/461105   
+        1  http://www.gunviolencearchive.org/incident/460726   
+        2  http://www.gunviolencearchive.org/incident/478855   
+        3  http://www.gunviolencearchive.org/incident/478925   
+        4  http://www.gunviolencearchive.org/incident/478959   
+        
+                                                  source\_url  \textbackslash{}
+        0  http://www.post-gazette.com/local/south/2013/0{\ldots}   
+        1  http://www.dailybulletin.com/article/zz/201301{\ldots}   
+        2  http://chronicle.northcoastnow.com/2013/02/14/{\ldots}   
+        3  http://www.dailydemocrat.com/20130106/aurora-s{\ldots}   
+        4  http://www.journalnow.com/news/local/article\_d{\ldots}   
+        
+           incident\_url\_fields\_missing  {\ldots}                    participant\_age  \textbackslash{}
+        0                        False  {\ldots}                              0::20   
+        1                        False  {\ldots}                              0::20   
+        2                        False  {\ldots}  0::25||1::31||2::33||3::34||4::33   
+        3                        False  {\ldots}         0::29||1::33||2::56||3::33   
+        4                        False  {\ldots}         0::18||1::46||2::14||3::47   
+        
+                                       participant\_age\_group  \textbackslash{}
+        0  0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A{\ldots}   
+        1  0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A{\ldots}   
+        2  0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A{\ldots}   
+        3  0::Adult 18+||1::Adult 18+||2::Adult 18+||3::A{\ldots}   
+        4  0::Adult 18+||1::Adult 18+||2::Teen 12-17||3::{\ldots}   
+        
+                                    participant\_gender  \textbackslash{}
+        0         0::Male||1::Male||3::Male||4::Female   
+        1                                      0::Male   
+        2  0::Male||1::Male||2::Male||3::Male||4::Male   
+        3         0::Female||1::Male||2::Male||3::Male   
+        4       0::Female||1::Male||2::Male||3::Female   
+        
+                                            participant\_name  \textbackslash{}
+        0                                     0::Julian Sims   
+        1                                  0::Bernard Gillis   
+        2  0::Damien Bell||1::Desmen Noble||2::Herman Sea{\ldots}   
+        3  0::Stacie Philbrook||1::Christopher Ratliffe||{\ldots}   
+        4  0::Danielle Imani Jameison||1::Maurice Eugene {\ldots}   
+        
+           participant\_relationship  \textbackslash{}
+        0                       NaN   
+        1                       NaN   
+        2                       NaN   
+        3                       NaN   
+        4                 3::Family   
+        
+                                          participant\_status  \textbackslash{}
+        0  0::Arrested||1::Injured||2::Injured||3::Injure{\ldots}   
+        1      0::Killed||1::Injured||2::Injured||3::Injured   
+        2  0::Injured, Unharmed, Arrested||1::Unharmed, A{\ldots}   
+        3         0::Killed||1::Killed||2::Killed||3::Killed   
+        4       0::Injured||1::Injured||2::Killed||3::Killed   
+        
+                                            participant\_type  \textbackslash{}
+        0  0::Victim||1::Victim||2::Victim||3::Victim||4:{\ldots}   
+        1  0::Victim||1::Victim||2::Victim||3::Victim||4:{\ldots}   
+        2  0::Subject-Suspect||1::Subject-Suspect||2::Vic{\ldots}   
+        3  0::Victim||1::Victim||2::Victim||3::Subject-Su{\ldots}   
+        4  0::Victim||1::Victim||2::Victim||3::Subject-Su{\ldots}   
+        
+                                                     sources state\_house\_district  \textbackslash{}
+        0  http://pittsburgh.cbslocal.com/2013/01/01/4-pe{\ldots}                  NaN   
+        1  http://losangeles.cbslocal.com/2013/01/01/man-{\ldots}                 62.0   
+        2  http://www.morningjournal.com/general-news/201{\ldots}                 56.0   
+        3  http://denver.cbslocal.com/2013/01/06/officer-{\ldots}                 40.0   
+        4  http://myfox8.com/2013/01/08/update-mother-sho{\ldots}                 62.0   
+        
+          state\_senate\_district  
+        0                   NaN  
+        1                  35.0  
+        2                  13.0  
+        3                  28.0  
+        4                  27.0  
+        
+        [5 rows x 29 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} (239677, 29)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{data}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} Index(['incident\_id', 'date', 'state', 'city\_or\_county', 'address', 'n\_killed',
+               'n\_injured', 'incident\_url', 'source\_url',
+               'incident\_url\_fields\_missing', 'congressional\_district', 'gun\_stolen',
+               'gun\_type', 'incident\_characteristics', 'latitude',
+               'location\_description', 'longitude', 'n\_guns\_involved', 'notes',
+               'participant\_age', 'participant\_age\_group', 'participant\_gender',
+               'participant\_name', 'participant\_relationship', 'participant\_status',
+               'participant\_type', 'sources', 'state\_house\_district',
+               'state\_senate\_district'],
+              dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Список колонок с типами данных}
+        \PY{n}{data}\PY{o}{.}\PY{n}{dtypes}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} incident\_id                      int64
+        date                            object
+        state                           object
+        city\_or\_county                  object
+        address                         object
+        n\_killed                         int64
+        n\_injured                        int64
+        incident\_url                    object
+        source\_url                      object
+        incident\_url\_fields\_missing       bool
+        congressional\_district         float64
+        gun\_stolen                      object
+        gun\_type                        object
+        incident\_characteristics        object
+        latitude                       float64
+        location\_description            object
+        longitude                      float64
+        n\_guns\_involved                float64
+        notes                           object
+        participant\_age                 object
+        participant\_age\_group           object
+        participant\_gender              object
+        participant\_name                object
+        participant\_relationship        object
+        participant\_status              object
+        participant\_type                object
+        sources                         object
+        state\_house\_district           float64
+        state\_senate\_district          float64
+        dtype: object
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Проверим наличие пустых значений}
+        \PY{c+c1}{\PYZsh{} Цикл по колонкам датасета}
+        \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{columns}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Количество пустых значений \PYZhy{} все значения заполнены}
+            \PY{n}{temp\PYZus{}null\PYZus{}count} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{data}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ \PYZhy{} }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{col}\PY{p}{,} \PY{n}{temp\PYZus{}null\PYZus{}count}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+incident\_id - 0
+date - 0
+state - 0
+city\_or\_county - 0
+address - 16497
+n\_killed - 0
+n\_injured - 0
+incident\_url - 0
+source\_url - 468
+incident\_url\_fields\_missing - 0
+congressional\_district - 11944
+gun\_stolen - 99498
+gun\_type - 99451
+incident\_characteristics - 326
+latitude - 7923
+location\_description - 197588
+longitude - 7923
+n\_guns\_involved - 99451
+notes - 81017
+participant\_age - 92298
+participant\_age\_group - 42119
+participant\_gender - 36362
+participant\_name - 122253
+participant\_relationship - 223903
+participant\_status - 27626
+participant\_type - 24863
+sources - 609
+state\_house\_district - 38772
+state\_senate\_district - 32335
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Основные статистические характеристки набора данных}
+        \PY{n}{data}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}         incident\_id       n\_killed      n\_injured  congressional\_district  \textbackslash{}
+        count  2.396770e+05  239677.000000  239677.000000           227733.000000   
+        mean   5.593343e+05       0.252290       0.494007                8.001265   
+        std    2.931287e+05       0.521779       0.729952                8.480835   
+        min    9.211400e+04       0.000000       0.000000                0.000000   
+        25\%    3.085450e+05       0.000000       0.000000                2.000000   
+        50\%    5.435870e+05       0.000000       0.000000                5.000000   
+        75\%    8.172280e+05       0.000000       1.000000               10.000000   
+        max    1.083472e+06      50.000000      53.000000               53.000000   
+        
+                    latitude      longitude  n\_guns\_involved  state\_house\_district  \textbackslash{}
+        count  231754.000000  231754.000000    140226.000000         200905.000000   
+        mean       37.546598     -89.338348         1.372442             55.447132   
+        std         5.130763      14.359546         4.678202             42.048117   
+        min        19.111400    -171.429000         1.000000              1.000000   
+        25\%        33.903400     -94.158725         1.000000             21.000000   
+        50\%        38.570600     -86.249600         1.000000             47.000000   
+        75\%        41.437375     -80.048625         1.000000             84.000000   
+        max        71.336800      97.433100       400.000000            901.000000   
+        
+               state\_senate\_district  
+        count           207342.00000  
+        mean                20.47711  
+        std                 14.20456  
+        min                  1.00000  
+        25\%                  9.00000  
+        50\%                 19.00000  
+        75\%                 30.00000  
+        max                 94.00000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Определим уникальные значения для целевого признака}
+         \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} array([ nan,   2.,   1.,   4.,   3.,   6.,  25.,  30.,   7.,  46., 151.,
+                 13.,  32.,  22.,  12.,  21.,   5.,  15.,   8.,  17.,  29.,  47.,
+                 42.,  73.,  50.,  39., 138., 280.,   9.,  20.,  36.,  10.,  34.,
+                 18.,  44.,  52.,  16.,  14.,  23.,  27.,  38.,  28.,  84.,  19.,
+                 82.,  11., 100.,  26.,  91.,  45., 111.,  53.,  24., 400., 346.,
+                152.,  41., 103.,  48.,  55., 107.,  35.,  49., 170., 338., 183.,
+                 70.,  62.,  76.,  98.,  81.,  33., 374., 158., 189.,  85.,  40.,
+                 43.,  96.,  68., 300.,  97., 112.,  60.,  89., 323.,  90., 145.,
+                114., 225., 130., 399., 115.,  83.,  59., 268.,  72.,  37.,  80.,
+                191.,  66.,  31.,  99.,  67., 200., 276., 127.])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{scatterplot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a1b0c9588>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{scatterplot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}injured}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a1b1136a0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)} 
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x106767dd8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{jointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} <seaborn.axisgrid.JointGrid at 0x1a19cd4e48>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{jointplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hex}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} <seaborn.axisgrid.JointGrid at 0x1a1a548b00>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/numpy/lib/histograms.py:708: RuntimeWarning: Converting input from bool to <class 'numpy.uint8'> for compatibility.
+  a, weights = \_ravel\_and\_check\_weights(a, weights)
+/anaconda3/lib/python3.6/site-packages/numpy/lib/histograms.py:754: RuntimeWarning: invalid value encountered in greater\_equal
+  keep = (tmp\_a >= first\_edge)
+/anaconda3/lib/python3.6/site-packages/numpy/lib/histograms.py:755: RuntimeWarning: invalid value encountered in less\_equal
+  keep \&= (tmp\_a <= last\_edge)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <seaborn.axisgrid.PairGrid at 0x1a1bac7588>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{pairplot}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{hue}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{n\PYZus{}injured}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        /anaconda3/lib/python3.6/site-packages/statsmodels/nonparametric/kde.py in kdensityfft(X, kernel, bw, weights, gridsize, adjust, clip, cut, retgrid)
+        454     try:
+    --> 455         bw = float(bw)
+        456     except:
+
+
+        ValueError: could not convert string to float: 'scott'
+
+        
+    During handling of the above exception, another exception occurred:
+
+
+        ZeroDivisionError                         Traceback (most recent call last)
+
+        <ipython-input-27-a80bd11bf26c> in <module>
+    ----> 1 sns.pairplot(data, hue="n\_injured")
+    
+
+        /anaconda3/lib/python3.6/site-packages/seaborn/axisgrid.py in pairplot(data, hue, hue\_order, palette, vars, x\_vars, y\_vars, kind, diag\_kind, markers, height, aspect, dropna, plot\_kws, diag\_kws, grid\_kws, size)
+       2109             diag\_kws.setdefault("shade", True)
+       2110             diag\_kws["legend"] = False
+    -> 2111             grid.map\_diag(kdeplot, **diag\_kws)
+       2112 
+       2113     \# Maybe plot on the off-diagonals
+
+
+        /anaconda3/lib/python3.6/site-packages/seaborn/axisgrid.py in map\_diag(self, func, **kwargs)
+       1397                     color = fixed\_color
+       1398 
+    -> 1399                 func(data\_k, label=label\_k, color=color, **kwargs)
+       1400 
+       1401             self.\_clean\_axis(ax)
+
+
+        /anaconda3/lib/python3.6/site-packages/seaborn/distributions.py in kdeplot(data, data2, shade, vertical, kernel, bw, gridsize, cut, clip, legend, cumulative, shade\_lowest, cbar, cbar\_ax, cbar\_kws, ax, **kwargs)
+        689         ax = \_univariate\_kdeplot(data, shade, vertical, kernel, bw,
+        690                                  gridsize, cut, clip, legend, ax,
+    --> 691                                  cumulative=cumulative, **kwargs)
+        692 
+        693     return ax
+
+
+        /anaconda3/lib/python3.6/site-packages/seaborn/distributions.py in \_univariate\_kdeplot(data, shade, vertical, kernel, bw, gridsize, cut, clip, legend, ax, cumulative, **kwargs)
+        281         x, y = \_statsmodels\_univariate\_kde(data, kernel, bw,
+        282                                            gridsize, cut, clip,
+    --> 283                                            cumulative=cumulative)
+        284     else:
+        285         \# Fall back to scipy if missing statsmodels
+
+
+        /anaconda3/lib/python3.6/site-packages/seaborn/distributions.py in \_statsmodels\_univariate\_kde(data, kernel, bw, gridsize, cut, clip, cumulative)
+        353     fft = kernel == "gau"
+        354     kde = smnp.KDEUnivariate(data)
+    --> 355     kde.fit(kernel, bw, fft, gridsize=gridsize, cut=cut, clip=clip)
+        356     if cumulative:
+        357         grid, y = kde.support, kde.cdf
+
+
+        /anaconda3/lib/python3.6/site-packages/statsmodels/nonparametric/kde.py in fit(self, kernel, bw, fft, weights, gridsize, adjust, cut, clip)
+        140             density, grid, bw = kdensityfft(endog, kernel=kernel, bw=bw,
+        141                     adjust=adjust, weights=weights, gridsize=gridsize,
+    --> 142                     clip=clip, cut=cut)
+        143         else:
+        144             density, grid, bw = kdensity(endog, kernel=kernel, bw=bw,
+
+
+        /anaconda3/lib/python3.6/site-packages/statsmodels/nonparametric/kde.py in kdensityfft(X, kernel, bw, weights, gridsize, adjust, clip, cut, retgrid)
+        455         bw = float(bw)
+        456     except:
+    --> 457         bw = bandwidths.select\_bandwidth(X, bw, kern) \# will cross-val fit this pattern?
+        458     bw *= adjust
+        459 
+
+
+        /anaconda3/lib/python3.6/site-packages/statsmodels/nonparametric/bandwidths.py in select\_bandwidth(x, bw, kernel)
+        170 \#TODO: uncomment checks when we have non-rule of thumb bandwidths for diff. kernels
+        171 \#    if kernel == "gauss":
+    --> 172     return bandwidth\_funcs[bw](x, kernel)
+        173 \#    else:
+        174 \#        raise ValueError("Only Gaussian Kernels are currently supported")
+
+
+        /anaconda3/lib/python3.6/site-packages/statsmodels/nonparametric/bandwidths.py in bw\_scott(x, kernel)
+         53     A = \_select\_sigma(x)
+         54     n = len(x)
+    ---> 55     return 1.059 * A * n ** (-0.2)
+         56 
+         57 def bw\_silverman(x, kernel=None):
+
+
+        ZeroDivisionError: 0.0 cannot be raised to a negative power
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a30658438>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} По вертикали}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a504311d0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a5027e748>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a515d07f0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a4fe0fbe0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} Распределение параметра n\PYZus{}killed сгруппированные по n\PYZus{}guns\PYZus{}involved.}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{violinplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a452b3ac8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{catplot}\PY{p}{(}\PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}killed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{n\PYZus{}guns\PYZus{}involved}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{violin}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{split}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} <seaborn.axisgrid.FacetGrid at 0x1a4aa7b550>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}                              incident\_id  n\_killed  n\_injured  \textbackslash{}
+         incident\_id                     1.000000  0.005052   0.009060   
+         n\_killed                        0.005052  1.000000  -0.125425   
+         n\_injured                       0.009060 -0.125425   1.000000   
+         incident\_url\_fields\_missing          NaN       NaN        NaN   
+         congressional\_district         -0.003585  0.055545  -0.007636   
+         latitude                        0.019365 -0.080078  -0.011379   
+         longitude                      -0.017031 -0.062149   0.036962   
+         n\_guns\_involved                -0.029638 -0.028200  -0.038843   
+         state\_house\_district           -0.002243 -0.006015  -0.030355   
+         state\_senate\_district          -0.007790 -0.010650  -0.044294   
+         
+                                      incident\_url\_fields\_missing  \textbackslash{}
+         incident\_id                                          NaN   
+         n\_killed                                             NaN   
+         n\_injured                                            NaN   
+         incident\_url\_fields\_missing                          NaN   
+         congressional\_district                               NaN   
+         latitude                                             NaN   
+         longitude                                            NaN   
+         n\_guns\_involved                                      NaN   
+         state\_house\_district                                 NaN   
+         state\_senate\_district                                NaN   
+         
+                                      congressional\_district  latitude  longitude  \textbackslash{}
+         incident\_id                               -0.003585  0.019365  -0.017031   
+         n\_killed                                   0.055545 -0.080078  -0.062149   
+         n\_injured                                 -0.007636 -0.011379   0.036962   
+         incident\_url\_fields\_missing                     NaN       NaN        NaN   
+         congressional\_district                     1.000000 -0.259488  -0.215606   
+         latitude                                  -0.259488  1.000000  -0.056713   
+         longitude                                 -0.215606 -0.056713   1.000000   
+         n\_guns\_involved                            0.021249 -0.001341  -0.016107   
+         state\_house\_district                       0.228827 -0.237958   0.236450   
+         state\_senate\_district                      0.309116  0.028611   0.113408   
+         
+                                      n\_guns\_involved  state\_house\_district  \textbackslash{}
+         incident\_id                        -0.029638             -0.002243   
+         n\_killed                           -0.028200             -0.006015   
+         n\_injured                          -0.038843             -0.030355   
+         incident\_url\_fields\_missing              NaN                   NaN   
+         congressional\_district              0.021249              0.228827   
+         latitude                           -0.001341             -0.237958   
+         longitude                          -0.016107              0.236450   
+         n\_guns\_involved                     1.000000             -0.003324   
+         state\_house\_district               -0.003324              1.000000   
+         state\_senate\_district               0.004247              0.431299   
+         
+                                      state\_senate\_district  
+         incident\_id                              -0.007790  
+         n\_killed                                 -0.010650  
+         n\_injured                                -0.044294  
+         incident\_url\_fields\_missing                    NaN  
+         congressional\_district                    0.309116  
+         latitude                                  0.028611  
+         longitude                                 0.113408  
+         n\_guns\_involved                           0.004247  
+         state\_house\_district                      0.431299  
+         state\_senate\_district                     1.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} На основе корреляционной матрицы можно сделать следующие выводы:}
+         
+         \PY{c+c1}{\PYZsh{} Количество убийств не коррелирует с количеством использованного оружия}
+         \PY{c+c1}{\PYZsh{} Количество убийств слабо коррелирует со Штатом, где произошел инциден}
+         
+         
+         \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:}                              incident\_id  n\_killed  n\_injured  \textbackslash{}
+         incident\_id                     1.000000  0.005493   0.013512   
+         n\_killed                        0.005493  1.000000  -0.246738   
+         n\_injured                       0.013512 -0.246738   1.000000   
+         incident\_url\_fields\_missing          NaN       NaN        NaN   
+         congressional\_district          0.004207  0.036124  -0.007188   
+         latitude                        0.015070 -0.080902   0.000291   
+         longitude                      -0.013647 -0.058358   0.019562   
+         n\_guns\_involved                -0.050056 -0.081509  -0.114222   
+         state\_house\_district           -0.013203 -0.001143  -0.031865   
+         state\_senate\_district          -0.006340 -0.002693  -0.046504   
+         
+                                      incident\_url\_fields\_missing  \textbackslash{}
+         incident\_id                                          NaN   
+         n\_killed                                             NaN   
+         n\_injured                                            NaN   
+         incident\_url\_fields\_missing                          1.0   
+         congressional\_district                               NaN   
+         latitude                                             NaN   
+         longitude                                            NaN   
+         n\_guns\_involved                                      NaN   
+         state\_house\_district                                 NaN   
+         state\_senate\_district                                NaN   
+         
+                                      congressional\_district  latitude  longitude  \textbackslash{}
+         incident\_id                                0.004207  0.015070  -0.013647   
+         n\_killed                                   0.036124 -0.080902  -0.058358   
+         n\_injured                                 -0.007188  0.000291   0.019562   
+         incident\_url\_fields\_missing                     NaN       NaN        NaN   
+         congressional\_district                     1.000000 -0.112861  -0.012292   
+         latitude                                  -0.112861  1.000000   0.107050   
+         longitude                                 -0.012292  0.107050   1.000000   
+         n\_guns\_involved                           -0.000714  0.023118   0.009880   
+         state\_house\_district                       0.163279 -0.185721   0.108216   
+         state\_senate\_district                      0.243113 -0.016902   0.063793   
+         
+                                      n\_guns\_involved  state\_house\_district  \textbackslash{}
+         incident\_id                        -0.050056             -0.013203   
+         n\_killed                           -0.081509             -0.001143   
+         n\_injured                          -0.114222             -0.031865   
+         incident\_url\_fields\_missing              NaN                   NaN   
+         congressional\_district             -0.000714              0.163279   
+         latitude                            0.023118             -0.185721   
+         longitude                           0.009880              0.108216   
+         n\_guns\_involved                     1.000000             -0.000281   
+         state\_house\_district               -0.000281              1.000000   
+         state\_senate\_district               0.005639              0.396432   
+         
+                                      state\_senate\_district  
+         incident\_id                              -0.006340  
+         n\_killed                                 -0.002693  
+         n\_injured                                -0.046504  
+         incident\_url\_fields\_missing                    NaN  
+         congressional\_district                    0.243113  
+         latitude                                 -0.016902  
+         longitude                                 0.063793  
+         n\_guns\_involved                           0.005639  
+         state\_house\_district                      0.396432  
+         state\_senate\_district                     1.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spearman}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:}                              incident\_id  n\_killed  n\_injured  \textbackslash{}
+         incident\_id                     1.000000  0.006796   0.017004   
+         n\_killed                        0.006796  1.000000  -0.255852   
+         n\_injured                       0.017004 -0.255852   1.000000   
+         incident\_url\_fields\_missing          NaN       NaN        NaN   
+         congressional\_district          0.006118  0.043134  -0.008773   
+         latitude                        0.022551 -0.099982   0.000375   
+         longitude                      -0.020565 -0.072173   0.024650   
+         n\_guns\_involved                -0.062174 -0.083575  -0.118768   
+         state\_house\_district           -0.019677 -0.001410  -0.039912   
+         state\_senate\_district          -0.009434 -0.003293  -0.057845   
+         
+                                      incident\_url\_fields\_missing  \textbackslash{}
+         incident\_id                                          NaN   
+         n\_killed                                             NaN   
+         n\_injured                                            NaN   
+         incident\_url\_fields\_missing                          NaN   
+         congressional\_district                               NaN   
+         latitude                                             NaN   
+         longitude                                            NaN   
+         n\_guns\_involved                                      NaN   
+         state\_house\_district                                 NaN   
+         state\_senate\_district                                NaN   
+         
+                                      congressional\_district  latitude  longitude  \textbackslash{}
+         incident\_id                                0.006118  0.022551  -0.020565   
+         n\_killed                                   0.043134 -0.099982  -0.072173   
+         n\_injured                                 -0.008773  0.000375   0.024650   
+         incident\_url\_fields\_missing                     NaN       NaN        NaN   
+         congressional\_district                     1.000000 -0.166628  -0.033359   
+         latitude                                  -0.166628  1.000000   0.152058   
+         longitude                                 -0.033359  0.152058   1.000000   
+         n\_guns\_involved                           -0.000857  0.028735   0.012254   
+         state\_house\_district                       0.230755 -0.263554   0.153893   
+         state\_senate\_district                      0.343338 -0.016409   0.092327   
+         
+                                      n\_guns\_involved  state\_house\_district  \textbackslash{}
+         incident\_id                        -0.062174             -0.019677   
+         n\_killed                           -0.083575             -0.001410   
+         n\_injured                          -0.118768             -0.039912   
+         incident\_url\_fields\_missing              NaN                   NaN   
+         congressional\_district             -0.000857              0.230755   
+         latitude                            0.028735             -0.263554   
+         longitude                           0.012254              0.153893   
+         n\_guns\_involved                     1.000000             -0.000347   
+         state\_house\_district               -0.000347              1.000000   
+         state\_senate\_district               0.006931              0.508050   
+         
+                                      state\_senate\_district  
+         incident\_id                              -0.009434  
+         n\_killed                                 -0.003293  
+         n\_injured                                -0.057845  
+         incident\_url\_fields\_missing                    NaN  
+         congressional\_district                    0.343338  
+         latitude                                 -0.016409  
+         longitude                                 0.092327  
+         n\_guns\_involved                           0.006931  
+         state\_house\_district                      0.508050  
+         state\_senate\_district                     1.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a46e477b8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_26_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} Вывод значений в ячейках}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.3f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a55ceb6d8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_27_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} Изменение цветовой гаммы}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{YlGnBu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.3f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a57412f98>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} Треугольный вариант матрицы}
+         \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} чтобы оставить нижнюю часть матрицы}
+         \PY{c+c1}{\PYZsh{} mask[np.triu\PYZus{}indices\PYZus{}from(mask)] = True}
+         \PY{c+c1}{\PYZsh{} чтобы оставить верхнюю часть матрицы}
+         \PY{n}{mask}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{tril\PYZus{}indices\PYZus{}from}\PY{p}{(}\PY{n}{mask}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{k+kc}{True}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{mask}\PY{o}{=}\PY{n}{mask}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.3f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a54fe0710>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{sharex}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{row}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pearson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.2f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.2f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{data}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spearman}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{fmt}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.2f}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Корреляционные матрицы, построенные различными методами}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{title}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pearson}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{title}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Kendall}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{title}\PY{o}{.}\PY{n}{set\PYZus{}text}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Spearman}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
